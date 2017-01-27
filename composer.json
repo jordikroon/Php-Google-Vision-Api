@@ -1,0 +1,28 @@
+{
+    "name": "jkroon/google-vision",
+    "license": "MIT",
+    "type": "library",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Jordi Kroon",
+            "email": "jordi@jordikroon.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "^6.1",
+        "zendframework/zend-hydrator": "^2.1",
+        "phpunit/phpunit": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vision\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vision\\Tests\\": "tests/"
+        }
+    }
+}

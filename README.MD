@@ -2,7 +2,7 @@ Google Vision, PHP Client
 =========================
 
 [![Build Status](https://travis-ci.org/jordi12100/Php-Google-Vision-Api.svg?branch=master)](https://travis-ci.org/jordi12100/Php-Google-Vision-Api)
-
+[![Dependency Status](https://www.versioneye.com/user/projects/588bdad0c64626002e5d6baf/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588bdad0c64626002e5d6baf)
 ## Instalation
 
 The easiest way to install Google Vision is through [Composer](http://getcomposer.org).
@@ -69,3 +69,7 @@ Run tests
 $ composer install
 $ ./vendor/bin/phpunit 
 ```
+
+Authors
+-------
+Jordi Kroon | [Github](https://github.com/jordi12100) | [Twitter](https://twitter.com/jordi12100) | [jordikroon.nl](http://jordikroon.nl)

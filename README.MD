@@ -27,6 +27,7 @@ $vision = new \Vision\Vision(
     $apiKey, 
     [
         // See a list of all features in the table below
+        // Feature, Limit
         new \Vision\Feature(\Vision\Feature::FACE_DETECTION, 100),
     ]
 );

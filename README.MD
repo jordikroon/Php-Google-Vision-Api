@@ -50,7 +50,7 @@ Available features
 
 | Name                  | Constant                               | 
 | :-------------------- | :------------------------------------- |
-| LABEL_DETECTION       | \Vision\Feature::FACE_DETECTION        |
+| LABEL_DETECTION       | \Vision\Feature::LABEL_DETECTION       |
 | TEXT_DETECTION        | \Vision\Feature::TEXT_DETECTION        |
 | FACE_DETECTION        | \Vision\Feature::FACE_DETECTION        |
 | LANDMARK_DETECTION    | \Vision\Feature::LANDMARK_DETECTION    |

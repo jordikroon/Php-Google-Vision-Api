@@ -40,7 +40,7 @@ $response = $vision->getRequest(
 $faces = $response->getFaceAnnotations();
 foreach ($faces as $face) {
     foreach ($face->getBoundingPoly()->getVertices() as $vertex) {
-        echo sprintf('Person at position X %f and Y %f', $vertex->getX(), $vertex->getY())
+        echo sprintf('Person at position X %f and Y %f', $vertex->getX(), $vertex->getY());
     }
 }
 ```

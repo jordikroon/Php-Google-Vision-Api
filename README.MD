@@ -1,7 +1,7 @@
 Google Vision, PHP Client
 =========================
 
-[![Build Status](https://travis-ci.org/jordi12100/Php-Google-Vision-Api.svg?branch=master)](https://travis-ci.org/jordikroon/Php-Google-Vision-Api)
+[![Build Status](https://travis-ci.org/jordikroon/Php-Google-Vision-Api.svg?branch=master)](https://travis-ci.org/jordikroon/Php-Google-Vision-Api)
 [![Dependency Status](https://www.versioneye.com/user/projects/588bdad0c64626002e5d6baf/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588bdad0c64626002e5d6baf)
 ## Instalation
 

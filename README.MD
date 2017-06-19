@@ -8,7 +8,7 @@ Google Vision, PHP Client
 The easiest way to install Google Vision is through [Composer](http://getcomposer.org).
 
 ```bash
-composer require jkroon/google-vision
+composer require jordikroon/google-vision
 ```
 
 Next is to obtain an API key through the [Google Cloud Platform](https://cloud.google.com). To get one visit the link below.

@@ -4,7 +4,7 @@
     "keywords": ["Google","Cloud", "Vision", "Api", "Image", "Face", "Recognition", "Landmark"],
     "license": "MIT",
     "type": "library",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "authors": [
         {
             "name": "Jordi Kroon",

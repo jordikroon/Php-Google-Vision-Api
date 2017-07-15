@@ -2,6 +2,7 @@
 
 namespace Vision\Response;
 
+use Vision\Annotation\CropHintsAnnotation;
 use Vision\Annotation\Error;
 use Vision\Annotation\FaceAnnotation;
 use Vision\Annotation\ImagePropertiesAnnotation;
@@ -44,6 +45,11 @@ class AnnotateImageResponse
      * @var ImagePropertiesAnnotation
      */
     protected $imagePropertiesAnnotation;
+
+    /**
+     * @var CropHintsAnnotation
+     */
+    protected $cropHintsAnnotation;
 
     /**
      * Only set on error
@@ -162,6 +168,22 @@ class AnnotateImageResponse
     public function setImagePropertiesAnnotation($imagePropertiesAnnotation)
     {
         $this->imagePropertiesAnnotation = $imagePropertiesAnnotation;
+    }
+
+    /**
+     * @return CropHintsAnnotation
+     */
+    public function getCropHintsAnnotation()
+    {
+        return $this->cropHintsAnnotation;
+    }
+
+    /**
+     * @param CropHintsAnnotation $cropHintsAnnotation
+     */
+    public function setCropHintsAnnotation($cropHintsAnnotation)
+    {
+        $this->cropHintsAnnotation = $cropHintsAnnotation;
     }
 
     /**

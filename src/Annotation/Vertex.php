@@ -5,27 +5,27 @@ namespace Vision\Annotation;
 class Vertex
 {
     /**
-     * @var float
+     * @var float|null
      */
     protected $x;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $y;
 
     /**
-     * @param float $x
-     * @param float $y
+     * @param float|null $x
+     * @param float|null $y
      */
-    public function __construct($x, $y)
+    public function __construct($x = null, $y = null)
     {
         $this->x = $x;
         $this->y = $y;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getX()
     {
@@ -33,7 +33,7 @@ class Vertex
     }
 
     /**
-     * @param float $x
+     * @param float|null $x
      */
     public function setX($x)
     {
@@ -41,7 +41,7 @@ class Vertex
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getY()
     {
@@ -49,7 +49,7 @@ class Vertex
     }
 
     /**
-     * @param float $y
+     * @param float|null $y
      */
     public function setY($y)
     {

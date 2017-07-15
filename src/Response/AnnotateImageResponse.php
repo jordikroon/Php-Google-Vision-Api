@@ -7,6 +7,7 @@ use Vision\Annotation\FaceAnnotation;
 use Vision\Annotation\ImagePropertiesAnnotation;
 use Vision\Annotation\SafeSearchAnnotation;
 use Vision\Annotation\EntityAnnotation;
+use Vision\Annotation\WebDetection;
 
 class AnnotateImageResponse
 {
@@ -44,6 +45,11 @@ class AnnotateImageResponse
      * @var ImagePropertiesAnnotation
      */
     protected $imagePropertiesAnnotation;
+
+    /**
+     * @var WebDetection
+     */
+    protected $webDetection;
 
     /**
      * Only set on error
@@ -162,6 +168,22 @@ class AnnotateImageResponse
     public function setImagePropertiesAnnotation($imagePropertiesAnnotation)
     {
         $this->imagePropertiesAnnotation = $imagePropertiesAnnotation;
+    }
+
+    /**
+     * @return WebDetection
+     */
+    public function getWebDetection()
+    {
+        return $this->webDetection;
+    }
+
+    /**
+     * @param WebDetection $webDetection
+     */
+    public function setWebDetection($webDetection)
+    {
+        $this->webDetection = $webDetection;
     }
 
     /**

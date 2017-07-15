@@ -51,6 +51,7 @@ class AnnotateImageResponse
      * @var WebDetection
      */
     protected $webDetection;
+    
     /**
      * @var CropHintsAnnotation
      */
@@ -189,6 +190,8 @@ class AnnotateImageResponse
     public function setWebDetection($webDetection)
     {
         $this->webDetection = $webDetection;
+    }
+    
     /**
      * @return CropHintsAnnotation
      */

@@ -13,6 +13,7 @@ class Feature
     const LOGO_DETECTION = 'LOGO_DETECTION';
     const SAFE_SEARCH_DETECTION = 'SAFE_SEARCH_DETECTION';
     const IMAGE_PROPERTIES = 'IMAGE_PROPERTIES';
+    const WEB_DETECTION = 'WEB_DETECTION';
     const CROP_HINTS = 'CROP_HINTS';
 
     /**
@@ -29,6 +30,7 @@ class Feature
         self::LOGO_DETECTION,
         self::SAFE_SEARCH_DETECTION,
         self::IMAGE_PROPERTIES,
+        self::WEB_DETECTION,
         self::CROP_HINTS
     ];
 

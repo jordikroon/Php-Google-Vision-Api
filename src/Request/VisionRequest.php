@@ -90,6 +90,7 @@ class VisionRequest
 
             $content = json_decode($response->getBody()->getContents(), true);
             $response = $content['responses'][0];
+            
             return $this->getResponseFromArray($response);
         } catch (ClientException $e) {
             return $this->getResponseFromException($e);

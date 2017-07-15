@@ -16,10 +16,10 @@ class BoundingPolyStrategy implements StrategyInterface
     {
         $verticles = $value ? $value->getVertices() : [];
         $verticleMap = array_map(function(Vertex $vertex) {
-            return [
+            return array_filter([
                 'x' => $vertex->getX(),
                 'y' => $vertex->getY(),
-            ];
+            ]);
         }, $verticles);
 
         return [

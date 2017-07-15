@@ -13,6 +13,7 @@ class Feature
     const LOGO_DETECTION = 'LOGO_DETECTION';
     const SAFE_SEARCH_DETECTION = 'SAFE_SEARCH_DETECTION';
     const IMAGE_PROPERTIES = 'IMAGE_PROPERTIES';
+    const CROP_HINTS = 'CROP_HINTS';
 
     /**
      * @see https://cloud.google.com/vision/docs/concepts#types_of_vision_api_requests
@@ -28,6 +29,7 @@ class Feature
         self::LOGO_DETECTION,
         self::SAFE_SEARCH_DETECTION,
         self::IMAGE_PROPERTIES,
+        self::CROP_HINTS
     ];
 
     /**

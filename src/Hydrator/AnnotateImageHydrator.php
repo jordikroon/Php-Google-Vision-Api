@@ -17,6 +17,7 @@ class AnnotateImageHydrator implements HydratorInterface
         'landmarkAnnotations' => '\\Vision\\Annotation\\EntityAnnotation',
         'imagePropertiesAnnotation' => '\\Vision\\Annotation\\ImagePropertiesAnnotation',
         'safeSearchAnnotation' => '\\Vision\\Annotation\\SafeSearchAnnotation',
+        'cropHintsAnnotation' => '\\Vision\\Annotation\\CropHintsAnnotation',
         'faceAnnotations' => '\\Vision\\Annotation\\FaceAnnotation',
         'webDetection' => '\\Vision\\Annotation\\WebDetection',
         'error' => '\\Vision\\Annotation\\Error',
@@ -34,6 +35,7 @@ class AnnotateImageHydrator implements HydratorInterface
         'imagePropertiesAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
         'safeSearchAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
         'webDetection' => '\\Vision\\Hydrator\\WebDetectionHydrator',
+        'cropHintsAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
         'error' => '\\Vision\\Hydrator\\AnnotationHydrator',
     ];
 

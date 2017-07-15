@@ -2,6 +2,7 @@
 
 namespace Vision\Response;
 
+use Vision\Annotation\CropHintsAnnotation;
 use Vision\Annotation\Error;
 use Vision\Annotation\FaceAnnotation;
 use Vision\Annotation\ImagePropertiesAnnotation;
@@ -50,6 +51,10 @@ class AnnotateImageResponse
      * @var WebDetection
      */
     protected $webDetection;
+    /**
+     * @var CropHintsAnnotation
+     */
+    protected $cropHintsAnnotation;
 
     /**
      * Only set on error
@@ -184,6 +189,20 @@ class AnnotateImageResponse
     public function setWebDetection($webDetection)
     {
         $this->webDetection = $webDetection;
+    /**
+     * @return CropHintsAnnotation
+     */
+    public function getCropHintsAnnotation()
+    {
+        return $this->cropHintsAnnotation;
+    }
+
+    /**
+     * @param CropHintsAnnotation $cropHintsAnnotation
+     */
+    public function setCropHintsAnnotation($cropHintsAnnotation)
+    {
+        $this->cropHintsAnnotation = $cropHintsAnnotation;
     }
 
     /**

@@ -57,7 +57,7 @@ Available features
 | LOGO_DETECTION        | \Vision\Feature::LOGO_DETECTION        |
 | SAFE_SEARCH_DETECTION | \Vision\Feature::SAFE_SEARCH_DETECTION |
 | IMAGE_PROPERTIES      | \Vision\Feature::IMAGE_PROPERTIES      |
-| CROP_HINTS             | \Vision\Feature::CROP_HINTS           |
+| CROP_HINTS            | \Vision\Feature::CROP_HINTS            |
 
 To add a feature, add a `new \Vision\Feature` instance to features array used as second parameter. See [Basic Usage](#Basic-Usage) for a full example.
 ```php

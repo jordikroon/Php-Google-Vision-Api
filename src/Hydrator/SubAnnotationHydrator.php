@@ -3,7 +3,6 @@
 namespace Vision\Hydrator;
 
 use Zend\Hydrator\AbstractHydrator;
-use Zend\Hydrator\ClassMethods;
 use Zend\Hydrator\HydratorInterface;
 
 class SubAnnotationHydrator extends AbstractHydrator implements HydratorInterface

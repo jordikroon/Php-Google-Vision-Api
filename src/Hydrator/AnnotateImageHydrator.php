@@ -2,6 +2,13 @@
 
 namespace Vision\Hydrator;
 
+use Vision\Annotation\CropHintsAnnotation;
+use Vision\Annotation\EntityAnnotation;
+use Vision\Annotation\Error;
+use Vision\Annotation\FaceAnnotation;
+use Vision\Annotation\ImagePropertiesAnnotation;
+use Vision\Annotation\SafeSearchAnnotation;
+use Vision\Annotation\WebDetection;
 use Zend\Hydrator\Exception\LogicException;
 use Zend\Hydrator\HydratorInterface;
 
@@ -11,32 +18,32 @@ class AnnotateImageHydrator implements HydratorInterface
      * @var array
      */
     protected $annotationClassMap = [
-        'logoAnnotations' => '\\Vision\\Annotation\\EntityAnnotation',
-        'labelAnnotations' => '\\Vision\\Annotation\\EntityAnnotation',
-        'textAnnotations' => '\\Vision\\Annotation\\EntityAnnotation',
-        'landmarkAnnotations' => '\\Vision\\Annotation\\EntityAnnotation',
-        'imagePropertiesAnnotation' => '\\Vision\\Annotation\\ImagePropertiesAnnotation',
-        'safeSearchAnnotation' => '\\Vision\\Annotation\\SafeSearchAnnotation',
-        'cropHintsAnnotation' => '\\Vision\\Annotation\\CropHintsAnnotation',
-        'faceAnnotations' => '\\Vision\\Annotation\\FaceAnnotation',
-        'webDetection' => '\\Vision\\Annotation\\WebDetection',
-        'error' => '\\Vision\\Annotation\\Error',
+        'logoAnnotations' => EntityAnnotation::class,
+        'labelAnnotations' => EntityAnnotation::class,
+        'textAnnotations' => EntityAnnotation::class,
+        'landmarkAnnotations' => EntityAnnotation::class,
+        'imagePropertiesAnnotation' => ImagePropertiesAnnotation::class,
+        'safeSearchAnnotation' => SafeSearchAnnotation::class,
+        'cropHintsAnnotation' => CropHintsAnnotation::class,
+        'faceAnnotations' => FaceAnnotation::class,
+        'webDetection' => WebDetection::class,
+        'error' => Error::class,
     ];
 
     /**
      * @var array
      */
     protected $hydratorClassMap = [
-        'logoAnnotations' => '\\Vision\\Hydrator\\SubAnnotationHydrator',
-        'labelAnnotations' => '\\Vision\\Hydrator\\SubAnnotationHydrator',
-        'textAnnotations' => '\\Vision\\Hydrator\\SubAnnotationHydrator',
-        'landmarkAnnotations' => '\\Vision\\Hydrator\\SubAnnotationHydrator',
-        'faceAnnotations' => '\\Vision\\Hydrator\\SubAnnotationHydrator',
-        'imagePropertiesAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
-        'safeSearchAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
-        'webDetection' => '\\Vision\\Hydrator\\WebDetectionHydrator',
-        'cropHintsAnnotation' => '\\Vision\\Hydrator\\AnnotationHydrator',
-        'error' => '\\Vision\\Hydrator\\AnnotationHydrator',
+        'logoAnnotations' => SubAnnotationHydrator::class,
+        'labelAnnotations' => SubAnnotationHydrator::class,
+        'textAnnotations' => SubAnnotationHydrator::class,
+        'landmarkAnnotations' => SubAnnotationHydrator::class,
+        'faceAnnotations' => SubAnnotationHydrator::class,
+        'imagePropertiesAnnotation' => AnnotationHydrator::class,
+        'safeSearchAnnotation' => AnnotationHydrator::class,
+        'cropHintsAnnotation' => AnnotationHydrator::class,
+        'error' => AnnotationHydrator::class,
+        'webDetection' => WebDetectionHydrator::class,
     ];
 
     /**

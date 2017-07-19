@@ -2,7 +2,6 @@
 
 namespace Vision\Hydrator\Strategy;
 
-use Vision\Annotation\Property;
 use Vision\Annotation\WebImage;
 use Zend\Hydrator\Strategy\StrategyInterface;
 

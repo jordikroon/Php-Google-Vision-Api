@@ -61,27 +61,30 @@ class AnnotateImageHydrator implements HydratorInterface
         $class = new \ReflectionClass($object);
         foreach ($class->getMethods() as $method) {
             $methodName = $method->name;
-            if (substr($methodName, 0, 3) !== 'get') {
+            if (!$this->canExtractMethod($object, $methodName)) {
                 continue;
             }
 
             $annotation = lcfirst(substr($methodName, 3));
-            if (!array_key_exists($annotation, $this->hydratorClassMap)) {
-                continue;
-            }
-
-            $annotationObject = $object->$methodName();
-            if (!$annotationObject) {
-                continue;
-            }
 
             /** @var HydratorInterface $hydrator */
             $hydrator = new $this->hydratorClassMap[$annotation];
-
-            $array[$annotation] = array_filter($this->extractAnnotation($annotationObject, $hydrator));
+            $array[$annotation] = array_filter($this->extractAnnotation($object->$methodName(), $hydrator));
         }
 
         return $array;
+    }
+
+    /**
+     * @param object $object
+     * @param string $methodName
+     * @return bool
+     */
+    protected function canExtractMethod($object, $methodName)
+    {
+        return substr($methodName, 0, 3) === 'get'
+            && isset($this->hydratorClassMap[lcfirst(substr($methodName, 3))])
+            && !!$object->$methodName();
     }
 
     /**
@@ -111,20 +114,20 @@ class AnnotateImageHydrator implements HydratorInterface
     public function hydrate(array $data, $object)
     {
         foreach ($data as $annotation => $value) {
-            if (!array_key_exists($annotation, $this->hydratorClassMap) || !array_key_exists($annotation, $this->annotationClassMap)) {
+            if (!isset($this->hydratorClassMap[$annotation]) || !isset($this->annotationClassMap[$annotation])) {
                 continue;
             }
-
-            $setter = 'set' . ucfirst($annotation);
 
             $hydrator = new $this->hydratorClassMap[$annotation];
             if (!$hydrator instanceof HydratorInterface) {
                 throw new LogicException('Hydrator does not implement HydratorInterface');
             }
 
-            $annotation = new $this->annotationClassMap[$annotation];
+            $annotationObject = new $this->annotationClassMap[$annotation];
+            $setter = 'set' . ucfirst($annotation);
+
             $object->$setter(
-                $hydrator->hydrate($value, $annotation)
+                $hydrator->hydrate($value, $annotationObject)
             );
         }
 

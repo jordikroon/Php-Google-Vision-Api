@@ -104,7 +104,7 @@ class VisionRequest
     protected function getResponseFromArray(array $response)
     {
         $hydrator = new AnnotateImageHydrator();
-        return $hydrator->hydrate($response, new AnnotateImageResponse());
+        return $hydrator->hydrate($response, new AnnotateImageResponse);
     }
 
     /**

@@ -199,7 +199,7 @@ class FaceAnnotation
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getLandmarkingConfidence()
     {
@@ -207,7 +207,7 @@ class FaceAnnotation
     }
 
     /**
-     * @param mixed $landmarkingConfidence
+     * @param float $landmarkingConfidence
      */
     public function setLandmarkingConfidence($landmarkingConfidence)
     {

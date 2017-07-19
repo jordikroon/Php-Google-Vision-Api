@@ -114,7 +114,7 @@ class AnnotateImageHydrator implements HydratorInterface
     public function hydrate(array $data, $object)
     {
         foreach ($data as $annotation => $value) {
-            if (!isset($this->hydratorClassMap[$annotation]) || !isset($this->annotationClassMap[$annotation])) {
+            if (!isset($this->hydratorClassMap[$annotation], $this->annotationClassMap[$annotation])) {
                 continue;
             }
 
@@ -126,9 +126,7 @@ class AnnotateImageHydrator implements HydratorInterface
             $annotationObject = new $this->annotationClassMap[$annotation];
             $setter = 'set' . ucfirst($annotation);
 
-            $object->$setter(
-                $hydrator->hydrate($value, $annotationObject)
-            );
+            $object->$setter($hydrator->hydrate($value, $annotationObject));
         }
 
         return $object;

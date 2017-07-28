@@ -24,11 +24,11 @@ class CropHintStrategy implements StrategyInterface
     public function extract($value)
     {
         return array_map(function(CropHint $cropHint) {
-            return [
+            return array_filter([
                 'boundingPoly' => $this->boundingPolyStrategy->extract($cropHint->getBoundingPoly()),
                 'confidence' => $cropHint->getConfidence(),
                 'importanceFraction' => $cropHint->getImportanceFraction(),
-            ];
+            ]);
         }, $value);
     }
 
@@ -43,7 +43,7 @@ class CropHintStrategy implements StrategyInterface
         foreach ($value as $cropHintInfo) {
             $cropHints[] = new CropHint(
                 $this->boundingPolyStrategy->hydrate($cropHintInfo['boundingPoly']),
-                $cropHintInfo['confidence'],
+                isset($cropHintInfo['confidence']) ? $cropHintInfo['confidence'] : null,
                 $cropHintInfo['importanceFraction']
             );
         }

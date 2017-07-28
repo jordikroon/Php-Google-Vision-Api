@@ -35,7 +35,7 @@ class SymbolsStrategy implements StrategyInterface
             return array_filter([
                 'property' => $this->textPropertyStrategy->extract($symbolEntity->getProperty()),
                 'boundingBox' => $this->boundingPolyStrategy->extract($symbolEntity->getBoundingBox()),
-                'text' => $symbolEntity->getSymbols(),
+                'text' => $symbolEntity->getText(),
             ]);
         }, $value);
     }

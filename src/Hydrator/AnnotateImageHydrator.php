@@ -8,6 +8,7 @@ use Vision\Annotation\Error;
 use Vision\Annotation\FaceAnnotation;
 use Vision\Annotation\ImagePropertiesAnnotation;
 use Vision\Annotation\SafeSearchAnnotation;
+use Vision\Annotation\TextAnnotation;
 use Vision\Annotation\WebDetection;
 use Zend\Hydrator\Exception\LogicException;
 use Zend\Hydrator\HydratorInterface;
@@ -27,6 +28,7 @@ class AnnotateImageHydrator implements HydratorInterface
         'cropHintsAnnotation' => CropHintsAnnotation::class,
         'faceAnnotations' => FaceAnnotation::class,
         'webDetection' => WebDetection::class,
+        'fullTextAnnotation' => TextAnnotation::class,
         'error' => Error::class,
     ];
 
@@ -44,6 +46,7 @@ class AnnotateImageHydrator implements HydratorInterface
         'cropHintsAnnotation' => AnnotationHydrator::class,
         'error' => AnnotationHydrator::class,
         'webDetection' => WebDetectionHydrator::class,
+        'fullTextAnnotation' => TextAnnotationHydrator::class,
     ];
 
     /**

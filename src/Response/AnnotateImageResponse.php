@@ -8,6 +8,7 @@ use Vision\Annotation\FaceAnnotation;
 use Vision\Annotation\ImagePropertiesAnnotation;
 use Vision\Annotation\SafeSearchAnnotation;
 use Vision\Annotation\EntityAnnotation;
+use Vision\Annotation\TextAnnotation;
 use Vision\Annotation\WebDetection;
 
 class AnnotateImageResponse
@@ -36,6 +37,11 @@ class AnnotateImageResponse
      * @var EntityAnnotation[]
      */
     protected $textAnnotations = [];
+
+    /**
+     * @var TextAnnotation
+     */
+    protected $fullTextAnnotation;
 
     /**
      * @var SafeSearchAnnotation
@@ -142,6 +148,22 @@ class AnnotateImageResponse
     public function setTextAnnotations($textAnnotations)
     {
         $this->textAnnotations = $textAnnotations;
+    }
+
+    /**
+     * @return TextAnnotation
+     */
+    public function getFullTextAnnotation()
+    {
+        return $this->fullTextAnnotation;
+    }
+
+    /**
+     * @param TextAnnotation $fullTextAnnotation
+     */
+    public function setFullTextAnnotation($fullTextAnnotation)
+    {
+        $this->fullTextAnnotation = $fullTextAnnotation;
     }
 
     /**

@@ -15,6 +15,7 @@ class Feature
     const IMAGE_PROPERTIES = 'IMAGE_PROPERTIES';
     const WEB_DETECTION = 'WEB_DETECTION';
     const CROP_HINTS = 'CROP_HINTS';
+    const DOCUMENT_TEXT_DETECTION = 'DOCUMENT_TEXT_DETECTION';
 
     /**
      * @see https://cloud.google.com/vision/docs/concepts#types_of_vision_api_requests
@@ -31,7 +32,8 @@ class Feature
         self::SAFE_SEARCH_DETECTION,
         self::IMAGE_PROPERTIES,
         self::WEB_DETECTION,
-        self::CROP_HINTS
+        self::CROP_HINTS,
+        self::DOCUMENT_TEXT_DETECTION
     ];
 
     /**

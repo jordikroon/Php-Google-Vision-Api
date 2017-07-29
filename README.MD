@@ -51,17 +51,18 @@ foreach ($faces as $face) {
 Available features
 ------------------
 
-| Name                  | Constant                               | 
-| :-------------------- | :------------------------------------- |
-| LABEL_DETECTION       | \Vision\Feature::LABEL_DETECTION       |
-| TEXT_DETECTION        | \Vision\Feature::TEXT_DETECTION        |
-| FACE_DETECTION        | \Vision\Feature::FACE_DETECTION        |
-| LANDMARK_DETECTION    | \Vision\Feature::LANDMARK_DETECTION    |
-| LOGO_DETECTION        | \Vision\Feature::LOGO_DETECTION        |
-| SAFE_SEARCH_DETECTION | \Vision\Feature::SAFE_SEARCH_DETECTION |
-| IMAGE_PROPERTIES      | \Vision\Feature::IMAGE_PROPERTIES      |
-| WEB_DETECTION         | \Vision\Feature::WEB_DETECTION         |
-| CROP_HINTS            | \Vision\Feature::CROP_HINTS            |
+| Name                                                                                | Constant                                  |
+| :-----------------------------------------------------------------------------------| :---------------------------------------- |
+| [LABEL_DETECTION](https://cloud.google.com/vision/docs/detecting-labels)            | \Vision\Feature::LABEL_DETECTION          |
+| [TEXT_DETECTION](https://cloud.google.com/vision/docs/detecting-text)               | \Vision\Feature::TEXT_DETECTION           |
+| [FACE_DETECTION](https://cloud.google.com/vision/docs/detecting-faces)              | \Vision\Feature::FACE_DETECTION           |
+| [LANDMARK_DETECTION](https://cloud.google.com/vision/docs/detecting-landmarks)      | \Vision\Feature::LANDMARK_DETECTION       |
+| [LOGO_DETECTION](https://cloud.google.com/vision/docs/detecting-logos).             | \Vision\Feature::LOGO_DETECTION           |
+| [SAFE_SEARCH_DETECTION](https://cloud.google.com/vision/docs/detecting-safe-search) | \Vision\Feature::SAFE_SEARCH_DETECTION    |
+| [IMAGE_PROPERTIES](https://cloud.google.com/vision/docs/detecting-properties)       | \Vision\Feature::IMAGE_PROPERTIES         |
+| [WEB_DETECTION](https://cloud.google.com/vision/docs/detecting-web)                 | \Vision\Feature::WEB_DETECTION            |
+| [CROP_HINTS](https://cloud.google.com/vision/docs/detecting-crop-hints)             | \Vision\Feature::CROP_HINTS               |
+| [DOCUMENT_TEXT_DETECTION](https://cloud.google.com/vision/docs/detecting-fulltext)  | \Vision\Feature::DOCUMENT_TEXT_DETECTION  |
 
 To add a feature, add a `new \Vision\Feature` instance to features array used as second parameter. See [Basic Usage](#Basic-Usage) for a full example.
 ```php

@@ -79,4 +79,4 @@ $ ./vendor/bin/phpunit
 
 Authors
 -------
-Jordi Kroon | [Github](https://github.com/jordi12100) | [Twitter](https://twitter.com/jordi12100) | [jordikroon.nl](http://jordikroon.nl)
+Jordi Kroon | [Github](https://github.com/jordikroon) | [Twitter](https://twitter.com/jordi12100) | [jordikroon.nl](http://jordikroon.nl)

@@ -31,15 +31,9 @@ class Vision
      * @param Image $image
      * @return AnnotateImageResponse
      */
-    public function getRequest(Image $image)
+    public function request(Image $image)
     {
-        $request = new VisionRequest(
-            $this->apiKey,
-            $image,
-            $this->features
-        );
-
-        return $request->send();
+        return (new VisionRequest($this->apiKey, $image, $this->features))->send();
     }
 
     /**
@@ -64,5 +58,16 @@ class Vision
     public function addFeature($feature)
     {
         $this->features[] = $feature;
+    }
+
+    /**
+     * @deprecated
+     *
+     * @param Image $image
+     * @return AnnotateImageResponse
+     */
+    public function getRequest(Image $image)
+    {
+        return $this->request($image);
     }
 }

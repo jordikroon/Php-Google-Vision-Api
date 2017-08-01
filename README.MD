@@ -36,7 +36,7 @@ $vision = new \Vision\Vision(
 );
 
 $imagePath = $_FILES['file']['tmp_name'];
-$response = $vision->getRequest(
+$response = $vision->request(
     new \Vision\Image($imagePath)
 );
 

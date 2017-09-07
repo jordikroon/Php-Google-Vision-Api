@@ -44,7 +44,7 @@ class CropHintStrategy implements StrategyInterface
             $cropHints[] = new CropHint(
                 $this->boundingPolyStrategy->hydrate($cropHintInfo['boundingPoly']),
                 isset($cropHintInfo['confidence']) ? $cropHintInfo['confidence'] : null,
-                $cropHintInfo['importanceFraction']
+                isset($cropHintInfo['importanceFraction']) ? $cropHintInfo['importanceFraction'] : null
             );
         }
 

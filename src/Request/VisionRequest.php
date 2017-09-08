@@ -29,6 +29,16 @@ class VisionRequest
     protected $image;
 
     /**
+     * @var string
+     */
+    protected $rawResponse;
+
+    /**
+     * @var ClientException
+     */
+    protected $clientException;
+
+    /**
      * @param string $apiKey
      * @param Image $image
      * @param Feature[] $features
@@ -88,13 +98,31 @@ class VisionRequest
                 ]
             );
 
-            $content = json_decode($response->getBody()->getContents(), true);
-            $response = $content['responses'][0];
-
-            return $this->getResponseFromArray($response);
+            $this->rawResponse = $response->getBody()->getContents();
         } catch (ClientException $e) {
-            return $this->getResponseFromException($e);
+            $this->clientException = $e;
         }
+    }
+
+    /**
+     * @return AnnotateImageResponse
+     */
+    public function getAnnotateImageResponse()
+    {
+        if(!is_null($this->clientException)) {
+            return $this->getResponseFromException($this->clientException);
+        } else {
+            $content = json_decode($this->rawResponse, true);
+            return $this->getResponseFromArray($content['responses'][0]);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRawResponse()
+    {
+        return $this->rawResponse;
     }
 
     /**

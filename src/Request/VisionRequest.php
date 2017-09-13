@@ -83,9 +83,6 @@ class VisionRequest
         );
     }
 
-    /**
-     * @return AnnotateImageResponse
-     */
     public function send()
     {
         try {
@@ -109,16 +106,16 @@ class VisionRequest
      */
     public function getAnnotateImageResponse()
     {
-        if(!is_null($this->clientException)) {
+        if (!$this->clientException) {
             return $this->getResponseFromException($this->clientException);
-        } else {
-            $content = json_decode($this->rawResponse, true);
-            return $this->getResponseFromArray($content['responses'][0]);
         }
+        
+        $content = json_decode($this->rawResponse, true);
+        return $this->getResponseFromArray($content['responses'][0]);
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getRawResponse()
     {

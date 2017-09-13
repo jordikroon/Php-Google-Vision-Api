@@ -7,8 +7,8 @@ use Vision\Response\AnnotateImageResponse;
 
 class Vision
 {
-	const RESPONSE_TYPE_JSON = 'JSON';
-	const RESPONSE_TYPE_OBJECT = 'OBJECT';
+    const RESPONSE_TYPE_JSON = 'JSON';
+    const RESPONSE_TYPE_OBJECT = 'OBJECT';
 
     /**
      * @var string
@@ -38,25 +38,25 @@ class Vision
     /**
      * @param Image $image
      * @param string $responseType
-     * @return mixed
+     * @return AnnotateImageResponse|string
      */
     public function request(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {
         $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features);
         $this->visionRequest->send();
 
-        return $this->getResponseType($responseType);
+        return $this->getResponseForType($responseType);
     }
 
     /**
      * @param string $responseType
-     * @return mixed|AnnotateImageResponse
+     * @return AnnotateImageResponse|string
      */
-    public function getResponseType($responseType)
+    public function getResponseForType($responseType)
     {
-        return $responseType === self::RESPONSE_TYPE_JSON ?
-            $this->visionRequest->getRawResponse() :
-            $this->visionRequest->getAnnotateImageResponse();
+        return $responseType === self::RESPONSE_TYPE_JSON
+            ? $this->visionRequest->getRawResponse()
+            : $this->visionRequest->getAnnotateImageResponse();
     }
 
     /**
@@ -87,10 +87,10 @@ class Vision
      * @deprecated
      *
      * @param Image $image
-     * @return AnnotateImageResponse
+     * @return AnnotateImageResponse|string
      */
-    public function getRequest(Image $image)
+    public function getRequest(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {
-        return $this->request($image);
+        return $this->request($image, $responseType);
     }
 }

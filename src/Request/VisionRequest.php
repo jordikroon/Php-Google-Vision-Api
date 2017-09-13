@@ -106,7 +106,7 @@ class VisionRequest
      */
     public function getAnnotateImageResponse()
     {
-        if (!$this->clientException) {
+        if ($this->clientException) {
             return $this->getResponseFromException($this->clientException);
         }
         

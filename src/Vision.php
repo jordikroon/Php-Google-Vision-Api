@@ -7,6 +7,9 @@ use Vision\Response\AnnotateImageResponse;
 
 class Vision
 {
+	const RESPONSE_TYPE_JSON = 'JSON';
+	const RESPONSE_TYPE_OBJECT = 'OBJECT';
+
     /**
      * @var string
      */
@@ -16,6 +19,11 @@ class Vision
      * @var array
      */
     protected $features = [];
+
+    /**
+     * @var VisionRequest
+     */
+    protected $visionRequest;
 
     /**
      * @param string $apiKey
@@ -29,11 +37,26 @@ class Vision
 
     /**
      * @param Image $image
-     * @return AnnotateImageResponse
+     * @param string $responseType
+     * @return mixed
      */
-    public function request(Image $image)
+    public function request(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {
-        return (new VisionRequest($this->apiKey, $image, $this->features))->send();
+        $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features);
+        $this->visionRequest->send();
+
+        return $this->getResponseType($responseType);
+    }
+
+    /**
+     * @param string $responseType
+     * @return mixed|AnnotateImageResponse
+     */
+    public function getResponseType($responseType)
+    {
+        return $responseType === self::RESPONSE_TYPE_JSON ?
+            $this->visionRequest->getRawResponse() :
+            $this->visionRequest->getAnnotateImageResponse();
     }
 
     /**

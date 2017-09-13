@@ -56,7 +56,7 @@ class VisionRequestTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-		$this->assertEquals($request->getAnnotateImageResponse()->getError()->getCode(), 'test');
+        $this->assertEquals($request->getAnnotateImageResponse()->getError()->getCode(), 'test');
     }
 
     public function testReturnsAnnotateImageResponse()
@@ -89,7 +89,7 @@ class VisionRequestTest extends \PHPUnit_Framework_TestCase
      * @return VisionRequest
      */
     protected function getVisionRequest()
-	{
+    {
         return new VisionRequest('abc-123', $this->image, $this->features);
     }
 

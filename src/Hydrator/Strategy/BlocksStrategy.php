@@ -55,10 +55,10 @@ class BlocksStrategy implements StrategyInterface
 
         foreach ($value as $blockEntityInfo) {
             $blockEntities[] = new Block(
-                $this->textPropertyStrategy->hydrate($blockEntityInfo['property']),
-                $this->boundingPolyStrategy->hydrate($blockEntityInfo['boundingBox']),
-                $this->paragraphsStrategy->hydrate($blockEntityInfo['paragraphs']),
-                $blockEntityInfo['blockType']
+                isset($blockEntityInfo['property']) ? $this->textPropertyStrategy->hydrate($blockEntityInfo['property']) : null,
+                isset($blockEntityInfo['boundingBox']) ? $this->boundingPolyStrategy->hydrate($blockEntityInfo['boundingBox']) : null,
+                isset($blockEntityInfo['paragraphs']) ? $this->paragraphsStrategy->hydrate($blockEntityInfo['paragraphs']) : [],
+                isset($blockEntityInfo['blockType']) ? $blockEntityInfo['blockType'] : Block::TYPE_UNKNOWN
             );
         }
 

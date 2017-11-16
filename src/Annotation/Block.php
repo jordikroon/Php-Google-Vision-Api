@@ -12,12 +12,12 @@ class Block
     const TYPE_BARCODE = 'BARCODE';
 
     /**
-     * @var TextProperty
+     * @var TextProperty|null
      */
     protected $property;
 
     /**
-     * @var BoundingPoly
+     * @var BoundingPoly|null
      */
     protected $boundingBox;
 
@@ -37,8 +37,12 @@ class Block
      * @param Paragraph[] $paragraphs
      * @param string $blockType
      */
-    public function __construct(TextProperty $property, BoundingPoly $boundingBox, array $paragraphs, $blockType)
-    {
+    public function __construct(
+        TextProperty $property = null,
+        BoundingPoly $boundingBox = null,
+        array $paragraphs = [],
+        $blockType = self::TYPE_UNKNOWN
+    ) {
         $this->property = $property;
         $this->boundingBox = $boundingBox;
         $this->paragraphs = $paragraphs;

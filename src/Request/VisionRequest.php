@@ -51,12 +51,12 @@ class VisionRequest
      * @param Feature[] $features
      * @param ImageContext $imageContext
      */
-    public function __construct($apiKey, Image $image, array $features, ImageContext $imageContext)
+    public function __construct($apiKey, Image $image, array $features, ImageContext $imageContext = null)
     {
         $this->apiKey = $apiKey;
         $this->features = $features;
         $this->image = $image;
-        $this->imageContext = $imageContext;
+        $this->imageContext = $imageContext ?: new ImageContext;
     }
 
 
@@ -135,10 +135,7 @@ class VisionRequest
 
     protected function extractImageContext()
     {
-        $hydrator = new AnnotationHydrator();
-        var_dump($hydrator->extract($this->imageContext));
-
-        exit;
+        return (new AnnotationHydrator)->extract($this->imageContext);
     }
 
     /**
@@ -147,8 +144,7 @@ class VisionRequest
      */
     protected function getResponseFromArray(array $response)
     {
-        $hydrator = new AnnotateImageHydrator();
-        return $hydrator->hydrate($response, new AnnotateImageResponse);
+        return (new AnnotateImageHydrator)->hydrate($response, new AnnotateImageResponse);
     }
 
     /**

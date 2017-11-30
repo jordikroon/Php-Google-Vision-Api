@@ -39,22 +39,26 @@ class LatLongRectStrategy implements StrategyInterface
      */
     public function hydrate($value)
     {
-        $minLatLng = isset($value['minLatLng']) ? $value['minLatLng'] : null;
-        $maxLatLng = isset($value['maxLatLng']) ? $value['maxLatLng'] : null;
+        $minLatLng = $this->getIfExists($value, 'minLatLng');
+        $maxLatLng = $this->getIfExists($value, 'maxLatLng');
 
         if (!$minLatLng && !$maxLatLng) {
             return null;
         }
 
         return new LatLongRect(
-            new LatLng(
-                isset($minLatLng['latitude']) ? $minLatLng['latitude'] : null,
-                isset($minLatLng['longitude']) ? $minLatLng['longitude'] : null
-            ),
-            new LatLng(
-                isset($maxLatLng['latitude']) ? $maxLatLng['latitude'] : null,
-                isset($maxLatLng['longitude']) ? $maxLatLng['longitude'] : null
-            )
+            new LatLng($this->getIfExists($minLatLng, 'latitude'), $this->getIfExists($minLatLng, 'longitude')),
+            new LatLng($this->getIfExists($maxLatLng, 'latitude'), $this->getIfExists($maxLatLng, 'longitude'))
         );
+    }
+
+    /**
+     * @param array $variable
+     * @param string $key
+     * @return null
+     */
+    protected function getIfExists($variable, $key)
+    {
+        return $variable && isset($variable[$key]) ? $variable[$key] : null;
     }
 }

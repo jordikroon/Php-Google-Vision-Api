@@ -135,7 +135,9 @@ class VisionRequest
 
     protected function extractImageContext()
     {
-        return (new AnnotationHydrator)->extract($this->imageContext);
+        return array_filter(
+            (new AnnotationHydrator)->extract($this->imageContext)
+        );
     }
 
     /**

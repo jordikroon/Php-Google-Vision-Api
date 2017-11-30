@@ -4,6 +4,7 @@ namespace Vision\Request;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Vision\Annotation\ImageContext;
 use Vision\Feature;
 use Vision\Image;
 use Vision\Hydrator\AnnotateImageHydrator;
@@ -42,8 +43,9 @@ class VisionRequest
      * @param string $apiKey
      * @param Image $image
      * @param Feature[] $features
+     * @param ImageContext $imageContext
      */
-    public function __construct($apiKey, Image $image, array $features)
+    public function __construct($apiKey, Image $image, array $features, ImageContext $imageContext)
     {
         $this->apiKey = $apiKey;
         $this->features = $features;
@@ -124,7 +126,7 @@ class VisionRequest
 
     /**
      * @param array $response
-     * @return AnnotateImageResponse
+     * @return AnnotateImageResponse|object
      */
     protected function getResponseFromArray(array $response)
     {

@@ -10,9 +10,9 @@ class ImageContext
     protected $latLongRect;
 
     /**
-     * @var string
+     * @var array
      */
-    protected $languageHints;
+    protected $languageHints = [];
 
     /**
      * @var CropHintsParams
@@ -36,7 +36,7 @@ class ImageContext
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getLanguageHints()
     {
@@ -44,11 +44,20 @@ class ImageContext
     }
 
     /**
-     * @param string $languageHints
+     * @param array $languageHints
      */
     public function setLanguageHints($languageHints)
     {
         $this->languageHints = $languageHints;
+    }
+
+    /**
+     * @param string $language
+     * @param string $hint
+     */
+    public function addLanguageHint($language, $hint)
+    {
+        $this->languageHints[$language] = $hint;
     }
 
     /**

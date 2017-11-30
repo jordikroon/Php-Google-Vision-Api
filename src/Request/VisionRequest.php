@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Vision\Annotation\ImageContext;
 use Vision\Feature;
+use Vision\Hydrator\AnnotationHydrator;
 use Vision\Image;
 use Vision\Hydrator\AnnotateImageHydrator;
 use Vision\Response\AnnotateImageResponse;
@@ -40,6 +41,11 @@ class VisionRequest
     protected $clientException;
 
     /**
+     * @var ImageContext
+     */
+    protected $imageContext;
+
+    /**
      * @param string $apiKey
      * @param Image $image
      * @param Feature[] $features
@@ -50,40 +56,9 @@ class VisionRequest
         $this->apiKey = $apiKey;
         $this->features = $features;
         $this->image = $image;
+        $this->imageContext = $imageContext;
     }
 
-    /**
-     * @return array
-     */
-    protected function getPayload()
-    {
-        return [
-            'requests' => [
-                [
-                    'image' => [
-                        'content' => $this->image->getImage(),
-                    ],
-                    'features' => $this->getMappedFeatures(),
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getMappedFeatures()
-    {
-        return array_map(
-            function (Feature $feature) {
-                return [
-                    'type' => $feature->getFeature(),
-                    'maxResults' => $feature->getMaxResults(),
-                ];
-            },
-            $this->features
-        );
-    }
 
     public function send()
     {
@@ -111,7 +86,7 @@ class VisionRequest
         if ($this->clientException) {
             return $this->getResponseFromException($this->clientException);
         }
-        
+
         $content = json_decode($this->rawResponse, true);
         return $this->getResponseFromArray($content['responses'][0]);
     }
@@ -122,6 +97,48 @@ class VisionRequest
     public function getRawResponse()
     {
         return $this->rawResponse;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPayload()
+    {
+        return [
+            'requests' => [
+                [
+                    'image' => [
+                        'content' => $this->image->getImage(),
+                    ],
+                    'features' => $this->getMappedFeatures(),
+                    'imageContext' => $this->extractImageContext()
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getMappedFeatures()
+    {
+        return array_map(
+            function (Feature $feature) {
+                return [
+                    'type' => $feature->getFeature(),
+                    'maxResults' => $feature->getMaxResults(),
+                ];
+            },
+            $this->features
+        );
+    }
+
+    protected function extractImageContext()
+    {
+        $hydrator = new AnnotationHydrator();
+        var_dump($hydrator->extract($this->imageContext));
+
+        exit;
     }
 
     /**

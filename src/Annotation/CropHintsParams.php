@@ -5,20 +5,20 @@ namespace Vision\Annotation;
 class CropHintsParams
 {
     /**
-     * @var float
+     * @var array
      */
-    protected $aspectRatios;
+    protected $aspectRatios = [];
 
     /**
-     * @param float $aspectRatios
+     * @param array $aspectRatios
      */
-    public function __construct($aspectRatios)
+    public function __construct(array $aspectRatios = [])
     {
         $this->aspectRatios = $aspectRatios;
     }
 
     /**
-     * @return float
+     * @return array
      */
     public function getAspectRatios()
     {
@@ -26,7 +26,7 @@ class CropHintsParams
     }
 
     /**
-     * @param float $aspectRatios
+     * @param array $aspectRatios
      */
     public function setAspectRatios($aspectRatios)
     {

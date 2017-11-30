@@ -50,7 +50,7 @@ class Vision
      */
     public function request(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {
-        $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $imageContext);
+        $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $this->imageContext);
         $this->visionRequest->send();
 
         return $this->getResponseForType($responseType);

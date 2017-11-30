@@ -10,7 +10,7 @@ class LatLongRectStrategy implements StrategyInterface
 {
     /**
      * @param LatLongRect $value
-     * @return array
+     * @return array|null
      */
     public function extract($value)
     {
@@ -35,7 +35,7 @@ class LatLongRectStrategy implements StrategyInterface
 
     /**
      * @param array $value
-     * @return LatLongRect
+     * @return LatLongRect|null
      */
     public function hydrate($value)
     {

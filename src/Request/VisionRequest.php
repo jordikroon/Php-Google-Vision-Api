@@ -65,7 +65,7 @@ class VisionRequest
         try {
             $client = new Client;
             $response = $client->post(
-                self::VISION_ANNOTATE_PREFIX.$this->apiKey,
+                self::VISION_ANNOTATE_PREFIX . $this->apiKey,
                 [
                     'content-type' => 'application/json',
                     'body' => json_encode($this->getPayload()),
@@ -123,7 +123,7 @@ class VisionRequest
     protected function getMappedFeatures()
     {
         return array_map(
-            function (Feature $feature) {
+            function(Feature $feature) {
                 return [
                     'type' => $feature->getFeature(),
                     'maxResults' => $feature->getMaxResults(),

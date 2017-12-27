@@ -22,6 +22,6 @@ class CropHintsParamsStrategy implements StrategyInterface
      */
     public function hydrate($value)
     {
-        return $value ? new CropHintsParams($value) : null;
+        return $value ? new CropHintsParams($value['aspectRatios']) : null;
     }
 }

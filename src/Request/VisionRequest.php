@@ -4,7 +4,9 @@ namespace Vision\Request;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Vision\Annotation\ImageContext;
 use Vision\Feature;
+use Vision\Hydrator\AnnotationHydrator;
 use Vision\Image;
 use Vision\Hydrator\AnnotateImageHydrator;
 use Vision\Response\AnnotateImageResponse;
@@ -39,56 +41,31 @@ class VisionRequest
     protected $clientException;
 
     /**
+     * @var ImageContext
+     */
+    protected $imageContext;
+
+    /**
      * @param string $apiKey
      * @param Image $image
      * @param Feature[] $features
+     * @param ImageContext $imageContext
      */
-    public function __construct($apiKey, Image $image, array $features)
+    public function __construct($apiKey, Image $image, array $features, ImageContext $imageContext = null)
     {
         $this->apiKey = $apiKey;
         $this->features = $features;
         $this->image = $image;
+        $this->imageContext = $imageContext ?: new ImageContext;
     }
 
-    /**
-     * @return array
-     */
-    protected function getPayload()
-    {
-        return [
-            'requests' => [
-                [
-                    'image' => [
-                        'content' => $this->image->getImage(),
-                    ],
-                    'features' => $this->getMappedFeatures(),
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getMappedFeatures()
-    {
-        return array_map(
-            function (Feature $feature) {
-                return [
-                    'type' => $feature->getFeature(),
-                    'maxResults' => $feature->getMaxResults(),
-                ];
-            },
-            $this->features
-        );
-    }
 
     public function send()
     {
         try {
             $client = new Client;
             $response = $client->post(
-                self::VISION_ANNOTATE_PREFIX.$this->apiKey,
+                self::VISION_ANNOTATE_PREFIX . $this->apiKey,
                 [
                     'content-type' => 'application/json',
                     'body' => json_encode($this->getPayload()),
@@ -109,7 +86,7 @@ class VisionRequest
         if ($this->clientException) {
             return $this->getResponseFromException($this->clientException);
         }
-        
+
         $content = json_decode($this->rawResponse, true);
         return $this->getResponseFromArray($content['responses'][0]);
     }
@@ -123,13 +100,53 @@ class VisionRequest
     }
 
     /**
+     * @return array
+     */
+    protected function getPayload()
+    {
+        return [
+            'requests' => [
+                [
+                    'image' => [
+                        'content' => $this->image->getImage(),
+                    ],
+                    'features' => $this->getMappedFeatures(),
+                    'imageContext' => $this->extractImageContext()
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getMappedFeatures()
+    {
+        return array_map(
+            function(Feature $feature) {
+                return [
+                    'type' => $feature->getFeature(),
+                    'maxResults' => $feature->getMaxResults(),
+                ];
+            },
+            $this->features
+        );
+    }
+
+    protected function extractImageContext()
+    {
+        return array_filter(
+            (new AnnotationHydrator)->extract($this->imageContext)
+        );
+    }
+
+    /**
      * @param array $response
-     * @return AnnotateImageResponse
+     * @return AnnotateImageResponse|object
      */
     protected function getResponseFromArray(array $response)
     {
-        $hydrator = new AnnotateImageHydrator();
-        return $hydrator->hydrate($response, new AnnotateImageResponse);
+        return (new AnnotateImageHydrator)->hydrate($response, new AnnotateImageResponse);
     }
 
     /**

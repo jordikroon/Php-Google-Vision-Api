@@ -2,6 +2,7 @@
 
 namespace Vision;
 
+use Vision\Annotation\ImageContext;
 use Vision\Request\VisionRequest;
 use Vision\Response\AnnotateImageResponse;
 
@@ -26,13 +27,20 @@ class Vision
     protected $visionRequest;
 
     /**
+     * @var ImageContext
+     */
+    protected $imageContext;
+
+    /**
      * @param string $apiKey
      * @param Feature[] $features
+     * @param ImageContext|null $imageContext
      */
-    public function __construct($apiKey, array $features = [])
+    public function __construct($apiKey, array $features = [], ImageContext $imageContext = null)
     {
         $this->apiKey = $apiKey;
         $this->setFeatures($features);
+        $this->setImageContext($imageContext);
     }
 
     /**
@@ -42,7 +50,7 @@ class Vision
      */
     public function request(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {
-        $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features);
+        $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $this->imageContext);
         $this->visionRequest->send();
 
         return $this->getResponseForType($responseType);
@@ -84,10 +92,27 @@ class Vision
     }
 
     /**
+     * @return ImageContext
+     */
+    public function getImageContext()
+    {
+        return $this->imageContext;
+    }
+
+    /**
+     * @param ImageContext $imageContext
+     */
+    public function setImageContext($imageContext)
+    {
+        $this->imageContext = $imageContext ?: new ImageContext;
+    }
+
+    /**
      * @deprecated
      *
      * @param Image $image
-     * @return AnnotateImageResponse|string
+     * @param string $responseType
+     * @return string|AnnotateImageResponse
      */
     public function getRequest(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
     {

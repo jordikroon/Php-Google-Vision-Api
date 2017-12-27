@@ -44,9 +44,9 @@ class AnnotateImageHydrator implements HydratorInterface
         'imagePropertiesAnnotation' => AnnotationHydrator::class,
         'safeSearchAnnotation' => AnnotationHydrator::class,
         'cropHintsAnnotation' => AnnotationHydrator::class,
-        'error' => AnnotationHydrator::class,
         'webDetection' => WebDetectionHydrator::class,
         'fullTextAnnotation' => TextAnnotationHydrator::class,
+        'error' => AnnotationHydrator::class,
     ];
 
     /**

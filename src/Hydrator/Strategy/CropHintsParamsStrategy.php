@@ -13,7 +13,7 @@ class CropHintsParamsStrategy implements StrategyInterface
      */
     public function extract($value)
     {
-        return $value ? ['aspectRatio' => $value->getAspectRatios()] : null;
+        return $value ? ['aspectRatios' => $value->getAspectRatios()] : null;
     }
 
     /**

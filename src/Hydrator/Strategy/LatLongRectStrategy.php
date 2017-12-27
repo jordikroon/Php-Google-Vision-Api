@@ -55,7 +55,7 @@ class LatLongRectStrategy implements StrategyInterface
     /**
      * @param array $variable
      * @param string $key
-     * @return null
+     * @return mixed
      */
     protected function getIfExists($variable, $key)
     {

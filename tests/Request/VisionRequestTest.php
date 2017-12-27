@@ -101,7 +101,6 @@ class VisionRequestTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $payload = $method->invokeArgs($request, []);
-
         $imageContextTestPayload = $this->getTestPayload()['requests'][0]['imageContext'];
 
         $this->assertEquals($payload, $imageContextTestPayload);

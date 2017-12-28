@@ -9,6 +9,7 @@ use Vision\Feature;
 use Vision\Hydrator\AnnotationHydrator;
 use Vision\Image;
 use Vision\Hydrator\AnnotateImageHydrator;
+use Vision\Request\Image\ImageInterface;
 use Vision\Response\AnnotateImageResponse;
 
 class VisionRequest
@@ -32,7 +33,7 @@ class VisionRequest
     protected $features = [];
 
     /**
-     * @var Image
+     * @var ImageInterface
      */
     protected $image;
 
@@ -53,11 +54,11 @@ class VisionRequest
 
     /**
      * @param string $apiKey
-     * @param Image $image
+     * @param ImageInterface $image
      * @param Feature[] $features
      * @param ImageContext $imageContext
      */
-    public function __construct($apiKey, Image $image, array $features, ImageContext $imageContext = null)
+    public function __construct($apiKey, ImageInterface $image, array $features, ImageContext $imageContext = null)
     {
         $this->apiKey = $apiKey;
         $this->features = $features;
@@ -129,7 +130,7 @@ class VisionRequest
             'requests' => [
                 [
                     'image' => [
-                        'content' => $this->image->getImage(),
+                        $this->image->getType() => $this->image->getValue(),
                     ],
                     'features' => $this->getMappedFeatures(),
                     'imageContext' => $this->extractImageContext()

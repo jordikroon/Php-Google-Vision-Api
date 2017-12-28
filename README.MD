@@ -37,7 +37,8 @@ $vision = new \Vision\Vision(
 
 $imagePath = $_FILES['file']['tmp_name'];
 $response = $vision->request(
-    new \Vision\Image($imagePath)
+    // See a list of all image loaders in the table below
+    new \Vision\Request\Image\LocalImage($imagePath)
 );
 
 $faces = $response->getFaceAnnotations();
@@ -63,6 +64,18 @@ Available features
 | [WEB_DETECTION](https://cloud.google.com/vision/docs/detecting-web)                 | \Vision\Feature::WEB_DETECTION            |
 | [CROP_HINTS](https://cloud.google.com/vision/docs/detecting-crop-hints)             | \Vision\Feature::CROP_HINTS               |
 | [DOCUMENT_TEXT_DETECTION](https://cloud.google.com/vision/docs/detecting-fulltext)  | \Vision\Feature::DOCUMENT_TEXT_DETECTION  |
+
+Available image loaders
+------------------
+
+| Image loader                                                                     | Description                                              |
+| :--------------------------------------------------------------------------------|: ------------------------------------------------------- |
+| [\Vision\Request\Image\Base64Image](src/Request/Image/Base64Image.php)           | Loads Base64 encoded images                              |
+| [\Vision\Request\Image\BinaryImage](src/Request/Image/BinaryImage.php)           | Loads binary images (file_get_contents or fopen)         |
+| [\Vision\Request\Image\GoogleCloudImage](src/Request/Image/GoogleCloudImage.php) | Loads images from a Google Cloud bucket                  |
+| [\Vision\Request\Image\LocalImage](src/Request/Image/LocalImage.php)             | Loads a locally stored image                             |
+| [\Vision\Request\Image\RemoteImage](src/Request/Image/RemoteImage.php)           | Loads a remote (HTTP/HTTPS) image somewhere from the web |
+ 
 
 To add a feature, add a `new \Vision\Feature` instance to features array used as second parameter. See [Basic Usage](#Basic-Usage) for a full example.
 ```php

@@ -3,6 +3,7 @@
 namespace Vision;
 
 use Vision\Annotation\ImageContext;
+use Vision\Request\Image\ImageInterface;
 use Vision\Request\VisionRequest;
 use Vision\Response\AnnotateImageResponse;
 
@@ -55,12 +56,12 @@ class Vision
     }
 
     /**
-     * @param Image $image
+     * @param ImageInterface $image
      * @param string $responseType
      * @return string|AnnotateImageResponse
      */
     public function request(
-        Image $image,
+        ImageInterface $image,
         $responseType = self::RESPONSE_TYPE_OBJECT
     ) {
         $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $this->imageContext);

@@ -1,35 +1,22 @@
 <?php
 
-namespace Vision\Tests;
+namespace Vision\Request\Image;
 
-use Vision\Image;
-
-class ImageTest extends \PHPUnit_Framework_TestCase
+class LocalImageTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException \Vision\Exception\ImageException
-     * @expectedExceptionMessage The given image is not in a valid Base64 string
-     */
-    public function testExceptionOnInvalidEncoding()
-    {
-        $image = new Image;
-        $image->setImage('IR&^FKUI^&');
-    }
-
     /**
      * @expectedException \Vision\Exception\ImageException
      * @expectedExceptionMessage Could not load the given image
      */
     public function testExceptionOnInvalidImage()
     {
-        new Image('path/to/notfound');
+        new LocalImage('path/to/notfound');
     }
 
-    public function testImageSetOnLoad()
+    public function testLocalImageIsEncoded()
     {
-        $image = new Image(__dir__ . '/Resources/testimage.jpg');
-        $this->assertNotNull($image);
-        $this->assertEquals($this->getTestImageBase(), $image->getImage());
+        $image = new LocalImage(__dir__ . '/../../Resources/testimage.jpg');
+        $this->assertEquals($this->getTestImageBase(), $image->getValue());
     }
 
     /**

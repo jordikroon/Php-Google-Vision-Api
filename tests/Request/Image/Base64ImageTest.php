@@ -1,10 +1,8 @@
 <?php
 
-namespace Vision\Tests;
+namespace Vision\Request\Image;
 
-use Vision\Image;
-
-class ImageTest extends \PHPUnit_Framework_TestCase
+class Base64ImageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \Vision\Exception\ImageException
@@ -12,24 +10,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionOnInvalidEncoding()
     {
-        $image = new Image;
-        $image->setImage('IR&^FKUI^&');
+        $image = new Base64Image();
+        $image->setValue('IR&^FKUI^&');
     }
 
-    /**
-     * @expectedException \Vision\Exception\ImageException
-     * @expectedExceptionMessage Could not load the given image
-     */
-    public function testExceptionOnInvalidImage()
+    public function testNoExceptionOnValidEncoding()
     {
-        new Image('path/to/notfound');
-    }
-
-    public function testImageSetOnLoad()
-    {
-        $image = new Image(__dir__ . '/Resources/testimage.jpg');
-        $this->assertNotNull($image);
-        $this->assertEquals($this->getTestImageBase(), $image->getImage());
+        $image = new Base64Image();
+        $image->setValue($this->getTestImageBase());
     }
 
     /**

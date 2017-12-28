@@ -3,14 +3,26 @@
 namespace Vision;
 
 use Vision\Exception\ImageException;
+use Vision\Request\Image\Base64Image;
+use Vision\Request\Image\ImageInterface;
 
-class Image
+/**
+ * @deprecated
+ *
+ * Alternatives classes are
+ * - Vision\Request\Image\LocalImage
+ * - Vision\Request\Image\Base64Image
+ */
+class Image extends Base64Image implements ImageInterface
 {
     /**
      * @var string
      */
     protected $image;
 
+    /**
+     * @param string|null $path
+     */
     public function __construct($path = null)
     {
         if ($path) {
@@ -27,8 +39,7 @@ class Image
         if (!$imageData) {
             throw new ImageException('Could not load the given image');
         }
-
-        $this->image = base64_encode($imageData);
+        $this->value = $this->image = base64_encode($imageData);
     }
 
     /**
@@ -44,10 +55,8 @@ class Image
      */
     public function setImage($image)
     {
-        if (base64_encode(base64_decode($image, true)) !== $image){
-            throw new ImageException('The given image is not in a valid Base64 string');
-        }
+        parent::setValue($image);
 
-        $this->image = $image;
+        $this->image = $this->value;
     }
 }

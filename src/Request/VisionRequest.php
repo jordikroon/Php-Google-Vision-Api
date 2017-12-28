@@ -13,7 +13,13 @@ use Vision\Response\AnnotateImageResponse;
 
 class VisionRequest
 {
-    const VISION_ANNOTATE_PREFIX = 'https://vision.googleapis.com/v1/images:annotate?key=';
+    const VISION_VERSION = 'v1';
+    const VISION_ANNOTATE_PREFIX = 'https://vision.googleapis.com/' . self::VISION_VERSION . '/images:annotate?key=';
+
+    /**
+     * @var string
+     */
+    protected $version = self::VISION_VERSION;
 
     /**
      * @var string
@@ -59,13 +65,11 @@ class VisionRequest
         $this->imageContext = $imageContext ?: new ImageContext;
     }
 
-
     public function send()
     {
         try {
-            $client = new Client;
-            $response = $client->post(
-                self::VISION_ANNOTATE_PREFIX . $this->apiKey,
+            $response = (new Client)->post(
+                $this->getRequestUrl(),
                 [
                     'content-type' => 'application/json',
                     'body' => json_encode($this->getPayload()),
@@ -97,6 +101,23 @@ class VisionRequest
     public function getRawResponse()
     {
         return $this->rawResponse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestUrl()
+    {
+        $visionUrl = self::VISION_ANNOTATE_PREFIX . $this->apiKey;
+        return str_replace('/' . self::VISION_VERSION . '/', '/' . $this->version . '/', $visionUrl);
+    }
+
+    /**
+     * @param string $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
     }
 
     /**
@@ -133,6 +154,9 @@ class VisionRequest
         );
     }
 
+    /**
+     * @return array
+     */
     protected function extractImageContext()
     {
         return array_filter(

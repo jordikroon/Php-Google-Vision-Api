@@ -58,7 +58,7 @@ Available features
 | [TEXT_DETECTION](https://cloud.google.com/vision/docs/detecting-text)               | \Vision\Feature::TEXT_DETECTION           |
 | [FACE_DETECTION](https://cloud.google.com/vision/docs/detecting-faces)              | \Vision\Feature::FACE_DETECTION           |
 | [LANDMARK_DETECTION](https://cloud.google.com/vision/docs/detecting-landmarks)      | \Vision\Feature::LANDMARK_DETECTION       |
-| [LOGO_DETECTION](https://cloud.google.com/vision/docs/detecting-logos).             | \Vision\Feature::LOGO_DETECTION           |
+| [LOGO_DETECTION](https://cloud.google.com/vision/docs/detecting-logos)              | \Vision\Feature::LOGO_DETECTION           |
 | [SAFE_SEARCH_DETECTION](https://cloud.google.com/vision/docs/detecting-safe-search) | \Vision\Feature::SAFE_SEARCH_DETECTION    |
 | [IMAGE_PROPERTIES](https://cloud.google.com/vision/docs/detecting-properties)       | \Vision\Feature::IMAGE_PROPERTIES         |
 | [WEB_DETECTION](https://cloud.google.com/vision/docs/detecting-web)                 | \Vision\Feature::WEB_DETECTION            |
@@ -69,13 +69,12 @@ Available image loaders
 ------------------
 
 | Image loader                                                                     | Description                                              |
-| :--------------------------------------------------------------------------------|: ------------------------------------------------------- |
-| [\Vision\Request\Image\Base64Image](src/Request/Image/Base64Image.php)           | Loads Base64 encoded images                              |
+| :--------------------------------------------------------------------------------| :------------------------------------------------------- |
+| [\Vision\Request\Image\Base64Image](src/Request/Image/Base64Image.php)           | Loads Base64 encoded images                              |
 | [\Vision\Request\Image\BinaryImage](src/Request/Image/BinaryImage.php)           | Loads binary images (file_get_contents or fopen)         |
 | [\Vision\Request\Image\GoogleCloudImage](src/Request/Image/GoogleCloudImage.php) | Loads images from a Google Cloud bucket                  |
 | [\Vision\Request\Image\LocalImage](src/Request/Image/LocalImage.php)             | Loads a locally stored image                             |
 | [\Vision\Request\Image\RemoteImage](src/Request/Image/RemoteImage.php)           | Loads a remote (HTTP/HTTPS) image somewhere from the web |
- 
 
 To add a feature, add a `new \Vision\Feature` instance to features array used as second parameter. See [Basic Usage](#Basic-Usage) for a full example.
 ```php
@@ -93,3 +92,4 @@ $ ./vendor/bin/phpunit
 Authors
 -------
 Jordi Kroon | [Github](https://github.com/jordikroon) | [Twitter](https://twitter.com/jordi12100) | [jordikroon.nl](https://jordikroon.nl)
+

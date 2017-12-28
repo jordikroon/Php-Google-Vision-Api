@@ -32,13 +32,24 @@ class Vision
     protected $imageContext;
 
     /**
+     * @var string
+     */
+    protected $version;
+
+    /**
      * @param string $apiKey
      * @param Feature[] $features
      * @param ImageContext|null $imageContext
+     * @param string $version
      */
-    public function __construct($apiKey, array $features = [], ImageContext $imageContext = null)
-    {
+    public function __construct(
+        $apiKey,
+        array $features = [],
+        ImageContext $imageContext = null,
+        $version = VisionRequest::VISION_VERSION
+    ) {
         $this->apiKey = $apiKey;
+        $this->version = $version;
         $this->setFeatures($features);
         $this->setImageContext($imageContext);
     }
@@ -46,11 +57,14 @@ class Vision
     /**
      * @param Image $image
      * @param string $responseType
-     * @return AnnotateImageResponse|string
+     * @return string|AnnotateImageResponse
      */
-    public function request(Image $image, $responseType = self::RESPONSE_TYPE_OBJECT)
-    {
+    public function request(
+        Image $image,
+        $responseType = self::RESPONSE_TYPE_OBJECT
+    ) {
         $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $this->imageContext);
+        $this->visionRequest->setVersion($this->version);
         $this->visionRequest->send();
 
         return $this->getResponseForType($responseType);

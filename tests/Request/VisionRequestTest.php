@@ -10,6 +10,7 @@ use Vision\Annotation\ImageContext;
 use Vision\Annotation\LatLng;
 use Vision\Annotation\LatLongRect;
 use Vision\Image;
+use Vision\Request\Image\Base64Image;
 use Vision\Request\VisionRequest;
 use Vision\Response\AnnotateImageResponse;
 
@@ -29,8 +30,8 @@ class VisionRequestTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->image = new Image();
-        $this->image->setImage('dGVzdA==');
+        $this->image = new Base64Image();
+        $this->image->setValue('dGVzdA==');
 
         $this->features = [
             new \Vision\Feature(\Vision\Feature::LANDMARK_DETECTION, 1),

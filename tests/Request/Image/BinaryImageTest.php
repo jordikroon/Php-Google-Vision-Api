@@ -1,6 +1,8 @@
 <?php
 
-namespace Vision\Request\Image;
+namespace Vision\Tests\Vision\Request\Image;
+
+use Vision\Request\Image\BinaryImage;
 
 class BinaryImageTest extends \PHPUnit_Framework_TestCase
 {

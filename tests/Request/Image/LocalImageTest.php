@@ -1,6 +1,8 @@
 <?php
 
-namespace Vision\Request\Image;
+namespace Vision\Tests\Request\Image;
+
+use Vision\Request\Image\LocalImage;
 
 class LocalImageTest extends \PHPUnit_Framework_TestCase
 {

@@ -70,8 +70,10 @@ class VisionRequest
      */
     public function send(Client $client = null)
     {
+        $client = $client ?: new Client;
+        
         try {
-            $response = ($client ?: new Client)->post(
+            $response = ($client)->post(
                 $this->getRequestUrl(),
                 [
                     'content-type' => 'application/json',

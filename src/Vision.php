@@ -2,6 +2,7 @@
 
 namespace Vision;
 
+use GuzzleHttp\Client;
 use Vision\Annotation\ImageContext;
 use Vision\Request\Image\ImageInterface;
 use Vision\Request\VisionRequest;
@@ -30,29 +31,37 @@ class Vision
     /**
      * @var ImageContext
      */
-    protected $imageContext;
+    protected $imageContext = null;
 
     /**
      * @var string
      */
-    protected $version;
+    protected $version = VisionRequest::VISION_VERSION;
+
+    /**
+     * @var Client
+     */
+    protected $httpClient;
 
     /**
      * @param string $apiKey
      * @param Feature[] $features
      * @param ImageContext|null $imageContext
      * @param string $version
+     * @param Client|null $httpClient
      */
     public function __construct(
         $apiKey,
         array $features = [],
         ImageContext $imageContext = null,
-        $version = VisionRequest::VISION_VERSION
+        $version = VisionRequest::VISION_VERSION,
+        Client $httpClient = null
     ) {
         $this->apiKey = $apiKey;
         $this->version = $version;
         $this->setFeatures($features);
         $this->setImageContext($imageContext);
+        $this->httpClient = $httpClient ?: new Client;
     }
 
     /**
@@ -66,7 +75,7 @@ class Vision
     ) {
         $this->visionRequest = new VisionRequest($this->apiKey, $image, $this->features, $this->imageContext);
         $this->visionRequest->setVersion($this->version);
-        $this->visionRequest->send();
+        $this->visionRequest->send($this->httpClient);
 
         return $this->getResponseForType($responseType);
     }
@@ -120,6 +129,22 @@ class Vision
     public function setImageContext($imageContext)
     {
         $this->imageContext = $imageContext ?: new ImageContext;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    /**
+     * @param Client $httpClient
+     */
+    public function setHttpClient($httpClient)
+    {
+        $this->httpClient = $httpClient;
     }
 
     /**

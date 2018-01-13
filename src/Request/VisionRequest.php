@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\ClientException;
 use Vision\Annotation\ImageContext;
 use Vision\Feature;
 use Vision\Hydrator\AnnotationHydrator;
-use Vision\Image;
 use Vision\Hydrator\AnnotateImageHydrator;
 use Vision\Request\Image\ImageInterface;
 use Vision\Response\AnnotateImageResponse;
@@ -66,10 +65,13 @@ class VisionRequest
         $this->imageContext = $imageContext ?: new ImageContext;
     }
 
-    public function send()
+    /**
+     * @param Client|null $client
+     */
+    public function send(Client $client = null)
     {
         try {
-            $response = (new Client)->post(
+            $response = ($client ?: new Client)->post(
                 $this->getRequestUrl(),
                 [
                     'content-type' => 'application/json',
@@ -110,7 +112,15 @@ class VisionRequest
     public function getRequestUrl()
     {
         $visionUrl = self::VISION_ANNOTATE_PREFIX . $this->apiKey;
-        return str_replace('/' . self::VISION_VERSION . '/', '/' . $this->version . '/', $visionUrl);
+        return str_replace('/' . self::VISION_VERSION . '/', '/' . $this->getVersion() . '/', $visionUrl);
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
     }
 
     /**

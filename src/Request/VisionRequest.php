@@ -145,7 +145,7 @@ class VisionRequest
                         $this->image->getType() => $this->image->getValue(),
                     ],
                     'features' => $this->getMappedFeatures(),
-                    'imageContext' => $this->extractImageContext()
+                    'imageContext' => $this->extractImageContext() ?: null
                 ],
             ],
         ];

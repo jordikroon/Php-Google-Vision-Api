@@ -141,14 +141,21 @@ class VisionRequest
         return [
             'requests' => [
                 [
-                    'image' => [
-                        $this->image->getType() => $this->image->getValue(),
-                    ],
+                    'image' => $this->getImagePayload(),
                     'features' => $this->getMappedFeatures(),
                     'imageContext' => $this->extractImageContext() ?: null
                 ],
             ],
         ];
+    }
+
+    protected function getImagePayload()
+    {
+        $ret = [$this->image->getType() => $this->image->getValue()];
+        if('imageUri' == $this->image->getType()){
+            $ret = ['source' => $ret];
+        }
+        return $ret;
     }
 
     /**

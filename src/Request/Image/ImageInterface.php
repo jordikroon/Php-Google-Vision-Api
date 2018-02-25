@@ -5,7 +5,7 @@ namespace Vision\Request\Image;
 interface ImageInterface
 {
     /**
-     * @return string
+     * @return string|array
      */
     public function getValue();
 

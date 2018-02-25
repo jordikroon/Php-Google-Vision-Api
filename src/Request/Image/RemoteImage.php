@@ -21,10 +21,18 @@ class RemoteImage extends AbstractImage implements ImageInterface
     }
 
     /**
+     * @return array
+     */
+    public function getValue()
+    {
+        return ['imageUri' => $this->value];
+    }
+
+    /**
      * @return string
      */
     public function getType()
     {
-        return 'imageUri';
+        return 'source';
     }
 }

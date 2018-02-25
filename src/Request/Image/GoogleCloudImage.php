@@ -28,11 +28,11 @@ class GoogleCloudImage extends AbstractImage implements ImageInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getValue()
     {
-        return 'gs://' . $this->bucket . '/' . $this->value;
+        return ['imageUri' => 'gs://' . $this->bucket . '/' . $this->value];
     }
 
     /**
@@ -40,6 +40,6 @@ class GoogleCloudImage extends AbstractImage implements ImageInterface
      */
     public function getType()
     {
-        return 'imageUri';
+        return 'source';
     }
 }

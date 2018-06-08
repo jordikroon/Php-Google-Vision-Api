@@ -32,7 +32,11 @@ class WebEntitiesStrategy implements StrategyInterface
         $webEntities = [];
 
         foreach ($value as $webEntityInfo) {
-            $webEntities[] = new WebEntity($webEntityInfo['entityId'], $webEntityInfo['description'], isset($webEntityInfo['score']) ? $webEntityInfo['score'] : null);
+            $webEntities[] = new WebEntity(
+                $webEntityInfo['entityId'],
+                isset($webEntityInfo['description']) ? $webEntityInfo['description'] : null,
+                isset($webEntityInfo['score']) ? $webEntityInfo['score'] : null
+            );
         }
 
         return $webEntities;

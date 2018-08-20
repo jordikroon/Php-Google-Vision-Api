@@ -2,9 +2,7 @@
 
 namespace Vision\Hydrator\Strategy;
 
-use Vision\Annotation\Paragraph;
 use Vision\Annotation\Symbol;
-use Vision\Annotation\Word;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
 class SymbolsStrategy implements StrategyInterface
@@ -32,9 +30,17 @@ class SymbolsStrategy implements StrategyInterface
     public function extract($value)
     {
         return array_map(function(Symbol $symbolEntity) {
+            $textProperty = $symbolEntity->getProperty()
+                ? $this->textPropertyStrategy->extract($symbolEntity->getProperty())
+                : null;
+
+            $boundingBox = $symbolEntity->getBoundingBox()
+                ? $this->boundingPolyStrategy->extract($symbolEntity->getBoundingBox())
+                : null;
+
             return array_filter([
-                'property' => $this->textPropertyStrategy->extract($symbolEntity->getProperty()),
-                'boundingBox' => $this->boundingPolyStrategy->extract($symbolEntity->getBoundingBox()),
+                'property' => $textProperty,
+                'boundingBox' => $boundingBox,
                 'text' => $symbolEntity->getText(),
             ]);
         }, $value);
@@ -49,10 +55,18 @@ class SymbolsStrategy implements StrategyInterface
         $symbolEntities = [];
 
         foreach ($value as $symbolEntityInfo) {
+            $textProperty = isset($symbolEntityInfo['property'])
+                ? $this->textPropertyStrategy->hydrate($symbolEntityInfo['property'])
+                : null;
+
+            $boundingBox = isset($symbolEntityInfo['boundingBox'])
+                ? $this->boundingPolyStrategy->hydrate($symbolEntityInfo['boundingBox'])
+                : null;
+
             $symbolEntities[] = new Symbol(
-                $this->textPropertyStrategy->hydrate($symbolEntityInfo['property']),
-                $this->boundingPolyStrategy->hydrate($symbolEntityInfo['boundingBox']),
-                $symbolEntityInfo['text']
+                $textProperty,
+                $boundingBox,
+                isset($symbolEntityInfo['text']) ? $symbolEntityInfo['text'] : null
             );
         }
 

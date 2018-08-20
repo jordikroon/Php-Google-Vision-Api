@@ -36,10 +36,23 @@ class ParagraphsStrategy implements StrategyInterface
     public function extract($value)
     {
         return array_map(function(Paragraph $paragraphEntity) {
+            $textProperty = $paragraphEntity->getProperty()
+                ? $this->textPropertyStrategy->extract($paragraphEntity->getProperty())
+                : null;
+
+            $boundingBox = $paragraphEntity->getBoundingBox()
+                ? $this->boundingPolyStrategy->extract($paragraphEntity->getBoundingBox())
+                : null;
+
+            $words = $paragraphEntity->getWords()
+                ? $this->wordsStrategy->extract($paragraphEntity->getWords())
+                : null;
+
+
             return array_filter([
-                'property' => $this->textPropertyStrategy->extract($paragraphEntity->getProperty()),
-                'boundingBox' => $this->boundingPolyStrategy->extract($paragraphEntity->getBoundingBox()),
-                'words' => $this->wordsStrategy->extract($paragraphEntity->getWords()),
+                'property' => $textProperty,
+                'boundingBox' => $boundingBox,
+                'words' => $words,
             ]);
         }, $value);
     }
@@ -51,13 +64,20 @@ class ParagraphsStrategy implements StrategyInterface
     public function hydrate($value)
     {
         $paragraphEntities = [];
-
         foreach ($value as $paragraphEntityInfo) {
-            $paragraphEntities[] = new Paragraph(
-                $this->textPropertyStrategy->hydrate($paragraphEntityInfo['property']),
-                $this->boundingPolyStrategy->hydrate($paragraphEntityInfo['boundingBox']),
-                $this->wordsStrategy->hydrate($paragraphEntityInfo['words'])
-            );
+            $textProperty = isset($paragraphEntityInfo['property'])
+                ? $this->textPropertyStrategy->hydrate($paragraphEntityInfo['property'])
+                : null;
+
+            $boundingBox = isset($paragraphEntityInfo['boundingBox'])
+                ? $this->boundingPolyStrategy->hydrate($paragraphEntityInfo['boundingBox'])
+                : null;
+
+            $words = isset($paragraphEntityInfo['words'])
+                ? $this->wordsStrategy->hydrate($paragraphEntityInfo['words'])
+                : null;
+
+            $paragraphEntities[] = new Paragraph($textProperty, $boundingBox, $words);
         }
 
         return $paragraphEntities;

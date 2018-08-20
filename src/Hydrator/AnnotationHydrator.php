@@ -20,5 +20,6 @@ class AnnotationHydrator extends ClassMethods
         $this->addStrategy('cropHints', new Strategy\CropHintStrategy());
         $this->addStrategy('latLongRect', new Strategy\LatLongRectStrategy());
         $this->addStrategy('cropHintsParams', new Strategy\CropHintsParamsStrategy());
+        $this->addStrategy('webDetectionParams', new Strategy\WebDetectionParamsStrategy());
     }
 }

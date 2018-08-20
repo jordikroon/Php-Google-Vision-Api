@@ -20,6 +20,11 @@ class ImageContext
     protected $cropHintsParams;
 
     /**
+     * @var WebDetectionParams
+     */
+    protected $webDetectionParams;
+
+    /**
      * @return LatLongRect
      */
     public function getLatLongRect()
@@ -74,5 +79,21 @@ class ImageContext
     public function setCropHintsParams($cropHintsParams)
     {
         $this->cropHintsParams = $cropHintsParams;
+    }
+
+    /**
+     * @return WebDetectionParams
+     */
+    public function getWebDetectionParams()
+    {
+        return $this->webDetectionParams;
+    }
+
+    /**
+     * @param WebDetectionParams $webDetectionParams
+     */
+    public function setWebDetectionParams($webDetectionParams)
+    {
+        $this->webDetectionParams = $webDetectionParams;
     }
 }

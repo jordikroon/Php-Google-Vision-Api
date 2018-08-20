@@ -29,6 +29,12 @@ class SafeSearchAnnotation
     protected $violence = Likelihood::UNKNOWN;
 
     /**
+     * @see Likelihood
+     * @var string
+     */
+    protected $racy;
+
+    /**
      * @return string
      */
     public function getAdult()
@@ -90,5 +96,21 @@ class SafeSearchAnnotation
     public function setViolence($violence)
     {
         $this->violence = $violence;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRacy()
+    {
+        return $this->racy;
+    }
+
+    /**
+     * @param string $racy
+     */
+    public function setRacy($racy)
+    {
+        $this->racy = $racy;
     }
 }

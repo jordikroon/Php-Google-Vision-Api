@@ -47,6 +47,7 @@ class AnnotateImageHydratorTest extends \PHPUnit_Framework_TestCase
         $safeSearchAnnotation->setSpoof('VERY_UNLIKELY');
         $safeSearchAnnotation->setMedical('LIKELY');
         $safeSearchAnnotation->setViolence('UNLIKELY');
+        $safeSearchAnnotation->setRacy('VERY_UNLIKELY');
 
         $annotateImageResponse = new AnnotateImageResponse;
         $annotateImageResponse->setLogoAnnotations([$entityAnnotation]);
@@ -87,6 +88,7 @@ class AnnotateImageHydratorTest extends \PHPUnit_Framework_TestCase
                 'spoof' => 'VERY_UNLIKELY',
                 'medical' => 'LIKELY',
                 'violence' => 'UNLIKELY',
+                'racy' => 'VERY_UNLIKELY',
             ],
         ];
     }

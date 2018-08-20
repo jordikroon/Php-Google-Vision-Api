@@ -5,14 +5,14 @@ namespace Vision\Annotation;
 class Paragraph
 {
     /**
-     * @var TextProperty
+     * @var TextProperty|null
      */
-    protected $property;
+    protected $property = null;
 
     /**
-     * @var BoundingPoly
+     * @var BoundingPoly|null
      */
-    protected $boundingBox;
+    protected $boundingBox = null;
 
     /**
      * @var Word[]
@@ -24,7 +24,7 @@ class Paragraph
      * @param BoundingPoly $boundingBox
      * @param Word[] $words
      */
-    public function __construct(TextProperty $property, BoundingPoly $boundingBox, array $words)
+    public function __construct(TextProperty $property = null, BoundingPoly $boundingBox = null, array $words = [])
     {
         $this->property = $property;
         $this->boundingBox = $boundingBox;
@@ -32,7 +32,7 @@ class Paragraph
     }
 
     /**
-     * @return TextProperty
+     * @return TextProperty|null
      */
     public function getProperty()
     {
@@ -40,7 +40,7 @@ class Paragraph
     }
 
     /**
-     * @param TextProperty $property
+     * @param TextProperty|null $property
      */
     public function setProperty($property)
     {
@@ -48,7 +48,7 @@ class Paragraph
     }
 
     /**
-     * @return BoundingPoly
+     * @return BoundingPoly|null
      */
     public function getBoundingBox()
     {
@@ -56,7 +56,7 @@ class Paragraph
     }
 
     /**
-     * @param BoundingPoly $boundingBox
+     * @param BoundingPoly|null $boundingBox
      */
     public function setBoundingBox($boundingBox)
     {

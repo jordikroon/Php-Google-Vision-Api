@@ -5,26 +5,26 @@ namespace Vision\Annotation;
 class Symbol
 {
     /**
-     * @var TextProperty
+     * @var TextProperty|null
      */
     protected $property;
 
     /**
-     * @var BoundingPoly
+     * @var BoundingPoly|null
      */
     protected $boundingBox;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $text;
 
     /**
-     * @param TextProperty $property
-     * @param BoundingPoly $boundingBox
+     * @param TextProperty|null $property
+     * @param BoundingPoly|null $boundingBox
      * @param string $text
      */
-    public function __construct(TextProperty $property, BoundingPoly $boundingBox, $text)
+    public function __construct(TextProperty $property = null, BoundingPoly $boundingBox = null, $text = null)
     {
         $this->property = $property;
         $this->boundingBox = $boundingBox;
@@ -32,7 +32,7 @@ class Symbol
     }
 
     /**
-     * @return TextProperty
+     * @return TextProperty|null
      */
     public function getProperty()
     {
@@ -40,7 +40,7 @@ class Symbol
     }
 
     /**
-     * @param TextProperty $property
+     * @param TextProperty|null $property
      */
     public function setProperty($property)
     {
@@ -48,7 +48,7 @@ class Symbol
     }
 
     /**
-     * @return BoundingPoly
+     * @return BoundingPoly|null
      */
     public function getBoundingBox()
     {
@@ -56,7 +56,7 @@ class Symbol
     }
 
     /**
-     * @param BoundingPoly $boundingBox
+     * @param BoundingPoly|null $boundingBox
      */
     public function setBoundingBox($boundingBox)
     {
@@ -64,7 +64,7 @@ class Symbol
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getText()
     {
@@ -72,7 +72,7 @@ class Symbol
     }
 
     /**
-     * @param string $text
+     * @param string|null $text
      */
     public function setText($text)
     {

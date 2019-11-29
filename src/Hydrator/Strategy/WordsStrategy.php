@@ -37,10 +37,22 @@ class WordsStrategy implements StrategyInterface
     public function extract($value)
     {
         return array_map(function(Word $wordEntity) {
+             $textProperty = $wordEntity->getProperty()
+                 ? $this->textPropertyStrategy->extract($wordEntity->getProperty())
+                 : null;
+
+             $boundingBox = $wordEntity->getBoundingBox()
+                 ? $this->boundingPolyStrategy->extract($wordEntity->getBoundingBox())
+                 : null;
+            
+             $symbols = $wordEntity->getSymbols()
+                 ? $this->symbolsStrategy->extract($wordEntity->getSymbols())
+                 : null;
+            
             return array_filter([
-                'property' => $this->textPropertyStrategy->extract($wordEntity->getProperty()),
-                'boundingBox' => $this->boundingPolyStrategy->extract($wordEntity->getBoundingBox()),
-                'symbols' => $this->symbolsStrategy->extract($wordEntity->getSymbols()),
+                'property' => $textProperty,
+                'boundingBox' => $boundingBox,
+                'symbols' => $symbols,
             ]);
         }, $value);
     }
@@ -54,10 +66,22 @@ class WordsStrategy implements StrategyInterface
         $wordEntities = [];
 
         foreach ($value as $wordEntityInfo) {
+            $textProperty = isset($wordEntityInfo['property'])
+                ? $this->textPropertyStrategy->hydrate($wordEntityInfo['property'])
+                : null;
+            
+            $boundingBox = isset($wordEntityInfo['boundingBox'])
+                 ? $this->boundingPolyStrategy->hydrate($wordEntityInfo['boundingBox'])
+                 : null;
+            
+            $symbols = isset($wordEntityInfo['symbols'])
+                 ? $this->symbolsStrategy->hydrate($wordEntityInfo['symbols'])
+                 : null;
+            
             $wordEntities[] = new Word(
-                $this->textPropertyStrategy->hydrate($wordEntityInfo['property']),
-                $this->boundingPolyStrategy->hydrate($wordEntityInfo['boundingBox']),
-                $this->symbolsStrategy->hydrate($wordEntityInfo['symbols'])
+                $textProperty,
+                $boundingBox,
+                $symbols
             );
         }
 

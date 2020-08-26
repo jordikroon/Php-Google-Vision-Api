@@ -83,6 +83,22 @@ class EntityAnnotation
     }
 
     /**
+     * @return float
+     */
+    public function getTopicality()
+    {
+        return $this->topicality;
+    }
+
+    /**
+     * @param float $topicality
+     */
+    public function setTopicality($topicality)
+    {
+        $this->topicality = $topicality;
+    }
+
+    /**
      * @return BoundingPoly
      */
     public function getBoundingPoly()
